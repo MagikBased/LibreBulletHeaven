@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://lcpe1is5854c"]
+
+[ext_resource type="Script" path="res://Scripts/basic_attack.gd" id="1_1b25i"]
+[ext_resource type="Texture2D" uid="uid://c7u2wcvww7en2" path="res://Sprites/Upgrades/gear.png" id="2_5he6y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1bet1"]
+radius = 16.0
+
+[node name="BasicAttack" type="Area2D" groups=["attack"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_1b25i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_5he6y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_1bet1")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

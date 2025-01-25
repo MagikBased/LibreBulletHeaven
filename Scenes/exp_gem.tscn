@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnsu0xumodjvp"]
+
+[ext_resource type="Texture2D" uid="uid://ej3lwytk7333" path="res://Sprites/experience.png" id="1_oes63"]
+[ext_resource type="Script" path="res://Scripts/exp_gem.gd" id="1_tafwx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cg1n5"]
+radius = 6.0
+height = 18.0
+
+[node name="ExpGem" type="Area2D" groups=["loot"]]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_tafwx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_oes63")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_cg1n5")

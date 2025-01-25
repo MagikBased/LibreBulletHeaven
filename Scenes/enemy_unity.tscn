@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1020j2qr7smd"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_73445"]
+[ext_resource type="Texture2D" uid="uid://c4rysx3ao32ue" path="res://Sprites/unity-icon-export.png" id="2_hrt0c"]
+[ext_resource type="PackedScene" uid="uid://d0yuyiwywm7pp" path="res://Scenes/hurt_box.tscn" id="3_ewkuv"]
+[ext_resource type="PackedScene" uid="uid://bxey1po1bq8je" path="res://Scenes/hit_box.tscn" id="4_4fypi"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_86n0v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yue0g"]
+size = Vector2(14, 15)
+
+[node name="enemy" type="CharacterBody2D"]
+collision_layer = 5
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_73445")
+move_speed = 50.0
+hp = 100
+experience = 10
+enemy_damage = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_hrt0c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CapsuleShape2D_86n0v")
+
+[node name="HurtBox" parent="." instance=ExtResource("3_ewkuv")]
+collision_mask = 4
+HurtBoxType = 1
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(0.5, 0)
+
+[node name="HitBox" parent="." instance=ExtResource("4_4fypi")]
+collision_layer = 2
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_yue0g")
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]
+[editable path="HitBox"]
